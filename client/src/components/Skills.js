@@ -1,16 +1,12 @@
 function Skills() {
-    return(
-         <div class="py-12 bg-white">
+    return (
+        <div class="py-12 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="lg:text-center" id="lower-title">
-                    <h2
-                        class="text-base text-indigo-600 font-semibold tracking-wide uppercase"
-                    >
+                    <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">
                         Summary
                     </h2>
-                    <p
-                        class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl"
-                    >
+                    <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
                         Software Developer profile / skills
                     </p>
                     <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
@@ -23,15 +19,10 @@ function Skills() {
                 </div>
 
                 <div class="mt-10">
-                    <dl
-                        class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10"
-                    >
+                    <dl class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
                         <div class="relative">
                             <dt>
-                                <div
-                                    class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white"
-                                >
-                                    <!-- Heroicon name: outline/globe-alt -->
+                                <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
                                     <svg
                                         class="h-6 w-6"
                                         xmlns="http://www.w3.org/2000/svg"
@@ -48,9 +39,7 @@ function Skills() {
                                         />
                                     </svg>
                                 </div>
-                                <p
-                                    class="ml-16 text-lg leading-6 font-medium text-gray-900"
-                                >
+                                <p class="ml-16 text-lg leading-6 font-medium text-gray-900">
                                     Front-End
                                 </p>
                             </dt>
@@ -66,10 +55,7 @@ function Skills() {
 
                         <div class="relative">
                             <dt>
-                                <div
-                                    class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white"
-                                >
-                                    <!-- Heroicon name: outline/scale -->
+                                <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
                                     <svg
                                         class="h-6 w-6"
                                         xmlns="http://www.w3.org/2000/svg"
@@ -86,9 +72,7 @@ function Skills() {
                                         />
                                     </svg>
                                 </div>
-                                <p
-                                    class="ml-16 text-lg leading-6 font-medium text-gray-900"
-                                >
+                                <p class="ml-16 text-lg leading-6 font-medium text-gray-900">
                                     Back-End
                                 </p>
                             </dt>
@@ -104,10 +88,7 @@ function Skills() {
 
                         <div class="relative">
                             <dt>
-                                <div
-                                    class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white"
-                                >
-                                    <!-- Heroicon name: outline/lightning-bolt -->
+                                <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
                                     <svg
                                         class="h-6 w-6"
                                         xmlns="http://www.w3.org/2000/svg"
@@ -124,9 +105,7 @@ function Skills() {
                                         />
                                     </svg>
                                 </div>
-                                <p
-                                    class="ml-16 text-lg leading-6 font-medium text-gray-900"
-                                >
+                                <p class="ml-16 text-lg leading-6 font-medium text-gray-900">
                                     Databases and Clouding
                                 </p>
                             </dt>
@@ -141,10 +120,7 @@ function Skills() {
 
                         <div class="relative">
                             <dt>
-                                <div
-                                    class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white"
-                                >
-                                    <!-- Heroicon name: outline/annotation -->
+                                <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
                                     <svg
                                         class="h-6 w-6"
                                         xmlns="http://www.w3.org/2000/svg"
@@ -161,9 +137,7 @@ function Skills() {
                                         />
                                     </svg>
                                 </div>
-                                <p
-                                    class="ml-16 text-lg leading-6 font-medium text-gray-900"
-                                >
+                                <p class="ml-16 text-lg leading-6 font-medium text-gray-900">
                                     Soft Skills / Personal Interests
                                 </p>
                             </dt>
@@ -180,6 +154,6 @@ function Skills() {
             </div>
         </div>
     );
-};
+}
 
 export default Skills;
