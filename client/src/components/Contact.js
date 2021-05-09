@@ -1,5 +1,3 @@
-import Footer from "./Footer";
-
 function Contact() {
     return (
         <>
@@ -52,7 +50,6 @@ function Contact() {
                     </div>
                 </main>
             </div>
-            <Footer />
         </>
     );
 }
