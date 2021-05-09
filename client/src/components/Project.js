@@ -78,7 +78,7 @@ function Project() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="w-full lg:w-5/6 lg:max-w-2xl md:w-1/2 mt-6 md:mt-0 shadow-xl">
+                                    <div class="w-full lg:w-5/6 lg:max-w-2xl md:w-1/2 md:mt-0 shadow-xl">
                                         <img
                                             class="object-cover object-center rounded-lg"
                                             alt="hero"
