@@ -5,8 +5,22 @@ import Header from "./Header";
 import Footer from "./Footer";
 import About from "./About";
 import Projects from "./Projects";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function App() {
+    const [projects, setProjects] = useState([]);
+
+    const fetchProjects = async () => {
+        const projects = await axios.get("/api/projects");
+        setProjects(projects.data);
+    };
+
+    useEffect(() => {
+        fetchProjects();
+        //console.log("projects dentro de App", projects);
+    }, []);
+
     return (
         <>
             <Header />
@@ -21,7 +35,7 @@ function App() {
                     <About />
                 </Route>
                 <Route path="/projects">
-                    <Projects />
+                    <Projects projects={projects} />
                 </Route>
             </BrowserRouter>
             <Footer />
