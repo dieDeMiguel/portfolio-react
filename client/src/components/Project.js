@@ -8,6 +8,7 @@ function Project({ slug, projects }) {
 
     const fetchProject = async () => {
         const project = await axios.get(`/api/project/${slug}`);
+        project.data.directory = `/${project.data.directory}`;
         setProject(project.data);
     };
 
@@ -49,13 +50,13 @@ function Project({ slug, projects }) {
                                                         {project.info}
                                                     </p>
                                                     <div className="links flex flex-col">
-                                                        {project.URL ? (
+                                                        {project.link ? (
                                                             <p className="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 lg:mt-5">
                                                                 <a
                                                                     target="_blank"
                                                                     className="font-semibold text-blue-700 hover:text-blue-400"
                                                                     href={
-                                                                        project.URL
+                                                                        project.link
                                                                     }
                                                                 >
                                                                     Go to
@@ -65,7 +66,6 @@ function Project({ slug, projects }) {
                                                         ) : (
                                                             <p className="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 lg:mt-5">
                                                                 <a
-                                                                    target="_blank"
                                                                     className="font-semibold text-blue-700 hover:text-blue-400"
                                                                     href={
                                                                         project.directory
@@ -77,13 +77,13 @@ function Project({ slug, projects }) {
                                                             </p>
                                                         )}
 
-                                                        {project.gitRepository && (
+                                                        {project.git && (
                                                             <p className="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 lg:mt-5">
                                                                 <a
                                                                     target="_blank"
                                                                     className="font-semibold text-blue-700 hover:text-blue-400"
                                                                     href={
-                                                                        project.gitRepository
+                                                                        project.git
                                                                     }
                                                                 >
                                                                     Go to git
