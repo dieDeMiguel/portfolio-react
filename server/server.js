@@ -10,7 +10,7 @@ const {
 
 app.use(compression());
 
-app.use(express.static(path.join(__dirname, "..", "client", "public")));
+app.use(express.static(path.join(__dirname, "..", "client", "public", "projects")));
 
 app.get("/api/projects", async (request, response) => {
     const projects = await getProjects();
