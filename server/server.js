@@ -16,9 +16,25 @@ app.get("/api/projects", async (request, response) => {
     const projects = await getProjects();
     if (!projects) {
         response.statusCode = 400;
-        response.error("Error while fetching projects: ", error);
+        response.json({
+            message: "Error while fetching projects",
+        });
+        return;
     }
     response.json(projects);
+});
+
+app.get("/api/project/:slug", async (request, response) => {
+    const slug = request.params.slug;
+    const project = await getProjectBySlug(slug);
+    if (!project) {
+        response.statusCode = 400;
+        response.json({
+            message: "Error while fetching project by slug",
+        });
+        return;
+    }
+    response.json(project);
 });
 
 app.get("*", function (req, res) {
