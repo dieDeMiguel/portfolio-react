@@ -1,4 +1,14 @@
+import { useState } from "react";
+import Footer from "./Footer";
+
 function Header() {
+    const [showMenu, setShowMenu] = useState(false);
+
+    function onMenuClick() {
+        console.log("click");
+        setShowMenu(!showMenu);
+    }
+
     return (
         <div
             className="relative bg-white overflow-hidden sm:pb-3"
@@ -33,6 +43,7 @@ function Header() {
                                     </a>
                                     <div className="-mr-2 flex items-center md:hidden">
                                         <button
+                                            onClick={onMenuClick}
                                             id="hamburger"
                                             type="button"
                                             className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
@@ -43,6 +54,7 @@ function Header() {
                                             </span>
 
                                             <svg
+                                                onClick={onMenuClick}
                                                 className="h-6 w-6"
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 fill="none"
@@ -92,7 +104,13 @@ function Header() {
                             </div>
                         </nav>
                     </div>
-                    <div className="fixed top-0 inset-x-0 p-2 transition transform origin-top-right hidden header-menu z-50">
+                    <div
+                        className={
+                            showMenu
+                                ? "top-0 inset-x-0 p-2 transition transform origin-top-right header-menu fixed"
+                                : "absolute top-0 inset-x-0 p-2 transition transform origin-top-right hidden header-menu"
+                        }
+                    >
                         <div className="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
                             <div className="px-5 pt-4 flex items-center justify-between">
                                 <div>
@@ -104,6 +122,7 @@ function Header() {
                                 </div>
                                 <div className="-mr-2">
                                     <button
+                                        onClick={onMenuClick}
                                         type="button"
                                         className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
                                     >
@@ -112,6 +131,7 @@ function Header() {
                                         </span>
 
                                         <svg
+                                            onClick={onMenuClick}
                                             className="h-6 w-6 close-header"
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
@@ -132,14 +152,14 @@ function Header() {
                             <div className="px-2 pt-2 pb-3 space-y-1">
                                 <a
                                     href="/"
-                                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+                                    className="block mt-0 mb-0 px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
                                 >
                                     Home
                                 </a>
 
                                 <a
                                     href="/projects"
-                                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+                                    className="block mt-0 mb-0 px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
                                 >
                                     Projects
                                 </a>
