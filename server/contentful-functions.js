@@ -1,4 +1,4 @@
-const secrets = require("../secrets.json");
+//const secrets = require("../secrets.json");
 
 const contentful_space =
     process.env.contentful_space || secrets.contentful_space;
