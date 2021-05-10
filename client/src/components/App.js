@@ -5,6 +5,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import About from "./About";
 import Projects from "./Projects";
+import Project from "./Project";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -37,6 +38,15 @@ function App() {
                 <Route path="/projects">
                     <Projects projects={projects} />
                 </Route>
+                <Route
+                    path="/project/:slug"
+                    render={(props) => (
+                        <Project
+                            slug={props.match.params.slug}
+                            projects={projects}
+                        />
+                    )}
+                />
             </BrowserRouter>
             <Footer />
         </>
