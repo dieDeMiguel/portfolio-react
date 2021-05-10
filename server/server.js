@@ -37,6 +37,18 @@ app.get("/api/project/:slug", async (request, response) => {
     response.json(project);
 });
 
+app.get("/api/about", async (request, response) => {
+    const aboutInfo = await getAboutInfo();
+    if (!aboutInfo) {
+        response.statusCode = 400;
+        response.json({
+            message: "Error while fetching about info",
+        });
+        return;
+    }
+    response.json(aboutInfo);
+});
+
 app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "..", "client", "index.html"));
 });
