@@ -37,7 +37,7 @@ function UploadProject() {
         };
         axios
             .post("/api/project", project)
-            .then((results) => console.log("results", results.));
+            .then((results) => console.log("results", results));
     }
 
     // Input value setter functions
