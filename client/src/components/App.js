@@ -1,11 +1,11 @@
 import { BrowserRouter, Route, Link } from "react-router-dom";
-import HomePage from "./HomePage";
-import Contact from "./Contact";
-import Header from "./Header";
-import Footer from "./Footer";
-import About from "./About";
-import Projects from "./Projects";
-import Project from "./Project";
+import HomePage from "./Pages/HomePage";
+import Contact from "./Pages/Contact";
+import Header from "./Partials/Header";
+import Footer from "./Partials/Footer";
+import About from "./Pages/About";
+import Projects from "./Pages/Projects";
+import Project from "./Pages/Project";
 import { useEffect, useState } from "react";
 import axios from "axios";
 

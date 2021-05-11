@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Footer from "./Footer";
 
 function Header() {
     const [showMenu, setShowMenu] = useState(false);

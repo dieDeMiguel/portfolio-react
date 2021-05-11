@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Footer from "./Footer";
+import Footer from "../Partials/Footer";
 
 function HomePage() {
     const [showMenu, setShowMenu] = useState(false);
