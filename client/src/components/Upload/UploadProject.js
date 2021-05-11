@@ -1,12 +1,99 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
+
 function UploadProject() {
-    function onFormSubmit(e) {
-        e.preventDefault();
-        axios.post();
+    const [info, setInfo] = useState("");
+    const [heading, setHeading] = useState("");
+    const [title, setTitle] = useState("");
+    const [image, setImage] = useState("");
+    const [technologies, setTechnologies] = useState("");
+    const [slug, setSlug] = useState("");
+    const [subtitle, setSubtitle] = useState("");
+    const [date, setDate] = useState("");
+    const [directory, setDirectory] = useState("");
+    const [link, setLink] = useState("");
+    const [git, setGit] = useState("");
+    const [file, setFile] = useState("");
+
+    useEffect(() => {
+        console.log("cambio el file", file);
+    }, [file]);
+
+    function onFormSubmit(event) {
+        event.preventDefault();
+        const project = {
+            info,
+            heading,
+            title,
+            image,
+            technologies,
+            slug,
+            subtitle,
+            date,
+            directory,
+            link,
+            git,
+            file,
+        };
+        axios
+            .post("/api/project", project)
+            .then((results) => console.log("results", results.));
     }
+
+    // Input value setter functions
+    function onInfoChange(event) {
+        setInfo(event.target.value);
+    }
+
+    function onHeadingChange(event) {
+        setHeading(event.target.value);
+    }
+
+    function onTitleChange(event) {
+        setTitle(event.target.value);
+    }
+
+    function onImageChange(event) {
+        setImage(event.target.value);
+    }
+
+    function onTechnologiesChange(event) {
+        setTechnologies(event.target.value);
+    }
+
+    function onSlugChange(event) {
+        setSlug(event.target.value);
+    }
+
+    function onSubtitleChange(event) {
+        setSubtitle(event.target.value);
+    }
+
+    function onDateChange(event) {
+        setDate(event.target.value);
+    }
+
+    function onDirectoryChange(event) {
+        setDirectory(event.target.value);
+    }
+
+    function onLinkChange(event) {
+        setLink(event.target.value);
+    }
+
+    function onGitChange(event) {
+        setGit(event.target.value);
+    }
+
+    function onFileChange(event) {
+        setFile(event.target.files[0]);
+    }
+
     return (
         <>
             <div className=" flex items-center justify-center mt-6 mb-6 ">
                 <form
+                    onSubmit={onFormSubmit}
                     id="form"
                     className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 lg:w-3/6"
                 >
@@ -23,12 +110,13 @@ function UploadProject() {
                             Info
                         </label>
                         <input
+                            onChange={onInfoChange}
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             name="info"
                             id="name"
                             type="text"
                             placeholder="Project's Info"
-                            required
+                            // required
                         />
                     </div>
 
@@ -40,12 +128,13 @@ function UploadProject() {
                             Heading
                         </label>
                         <input
+                            onChange={onHeadingChange}
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             name="heading"
                             id="tel"
                             type="tel"
                             placeholder="Project's heading"
-                            required
+                            // required
                         />
                     </div>
 
@@ -57,12 +146,13 @@ function UploadProject() {
                             Title
                         </label>
                         <input
+                            onChange={onTitleChange}
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             name="title"
                             id="email"
-                            type="email"
+                            type="text"
                             placeholder="Project's title"
-                            required
+                            // required
                         />
                     </div>
 
@@ -74,12 +164,13 @@ function UploadProject() {
                             Image
                         </label>
                         <input
+                            onChange={onImageChange}
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             name="image"
                             id="date"
                             type="text"
                             placeholder="No image uploaded yet"
-                            required
+                            // required
                         />
                     </div>
 
@@ -91,6 +182,7 @@ function UploadProject() {
                             Technologies
                         </label>
                         <textarea
+                            onChange={onTechnologiesChange}
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             name="technologies"
                             id="message1"
@@ -107,12 +199,13 @@ function UploadProject() {
                             Slug
                         </label>
                         <input
+                            onChange={onSlugChange}
                             className="bshadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             name="slug"
                             id="message2"
                             type="text"
                             placeholder="Project's slug"
-                            required
+                            // required
                         />
                     </div>
                     <div className="mb-4">
@@ -123,12 +216,13 @@ function UploadProject() {
                             Subtitle
                         </label>
                         <input
+                            onChange={onSubtitleChange}
                             className="bshadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             name="subtitle"
                             id="message2"
                             type="text"
                             placeholder="Project's subtitle"
-                            required
+                            // required
                         />
                     </div>
                     <div className="mb-4">
@@ -139,12 +233,13 @@ function UploadProject() {
                             Date
                         </label>
                         <input
+                            onChange={onDateChange}
                             className="bshadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             name="date"
                             id="message2"
                             type="text"
                             placeholder="Project's date"
-                            required
+                            // required
                         />
                     </div>
                     <div className="mb-4">
@@ -155,6 +250,7 @@ function UploadProject() {
                             Directory
                         </label>
                         <input
+                            onChange={onDirectoryChange}
                             className="bshadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             name="directory"
                             id="message2"
@@ -170,6 +266,7 @@ function UploadProject() {
                             Link
                         </label>
                         <input
+                            onChange={onLinkChange}
                             className="bshadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             name="link"
                             id="message2"
@@ -185,12 +282,13 @@ function UploadProject() {
                             Git
                         </label>
                         <input
+                            onChange={onGitChange}
                             className="bshadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             name="git"
                             id="message2"
                             type="text"
                             placeholder="Project's git"
-                            required
+                            // required
                         />
                     </div>
                     <div className="flex w-full h-72 items-center justify-center bg-grey-lighter">
@@ -206,12 +304,19 @@ function UploadProject() {
                             <span className="mt-2 text-base leading-normal">
                                 Select a file
                             </span>
-                            <input type="file" className="hidden" />
+
+                            <input
+                                onChange={onFileChange}
+                                type="file"
+                                name="file"
+                                className="hidden"
+                                // required
+                            />
+                            <button type="submit">Upload</button>
                         </label>
                     </div>
                     <div className="flex items-center justify-between">
                         <button
-                            onSubmit={onFormSubmit}
                             style={{ margin: "0 auto" }}
                             id="submit"
                             className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
