@@ -38,10 +38,11 @@ function createProject({
     link,
     date,
     git,
+    position,
 }) {
     return db
         .query(
-            "INSERT INTO projects (info, heading, title, img, technologies, slug, directory, link, date, git) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id",
+            "INSERT INTO projects (info, heading, title, img, technologies, slug, directory, link, date, git, position) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING id",
             [
                 info,
                 heading,
@@ -53,6 +54,7 @@ function createProject({
                 link,
                 date,
                 git,
+                position,
             ]
         )
         .then((result) => result.rows[0].id);

@@ -13,6 +13,7 @@ CREATE TABLE projects (
     link VARCHAR(255),
     date VARCHAR(255),
     git VARCHAR(255),
+    position SMALLINT,
     created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
 

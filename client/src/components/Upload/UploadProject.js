@@ -5,7 +5,6 @@ function UploadProject() {
     const [info, setInfo] = useState("");
     const [heading, setHeading] = useState("");
     const [title, setTitle] = useState("");
-    const [image, setImage] = useState("");
     const [technologies, setTechnologies] = useState("");
     const [slug, setSlug] = useState("");
     const [subtitle, setSubtitle] = useState("");
@@ -13,6 +12,7 @@ function UploadProject() {
     const [directory, setDirectory] = useState("");
     const [link, setLink] = useState("");
     const [git, setGit] = useState("");
+    const [position, setPosition] = useState("");
     const [file, setFile] = useState("");
 
     useEffect(() => {
@@ -36,7 +36,6 @@ function UploadProject() {
                         info: info,
                         heading: heading,
                         title: title,
-                        image: image,
                         technologies: technologies,
                         slug: slug,
                         subtitle: subtitle,
@@ -44,7 +43,8 @@ function UploadProject() {
                         directory: directory,
                         link: link,
                         git: git,
-                        img: response.data.file,
+                        position: position,
+                        img: response.data,
                     })
                     .then((message) => {
                         console.log(message);
@@ -66,10 +66,6 @@ function UploadProject() {
 
     function onTitleChange(event) {
         setTitle(event.target.value);
-    }
-
-    function onImageChange(event) {
-        setImage(event.target.value);
     }
 
     function onTechnologiesChange(event) {
@@ -98,6 +94,10 @@ function UploadProject() {
 
     function onGitChange(event) {
         setGit(event.target.value);
+    }
+
+    function onPositionChange(event) {
+        setPosition(event.target.value);
     }
 
     function onFileChange(event) {
@@ -167,24 +167,6 @@ function UploadProject() {
                             id="email"
                             type="text"
                             placeholder="Project's title"
-                            required
-                        />
-                    </div>
-
-                    <div className="mb-4">
-                        <label
-                            className="block text-gray-700 text-sm font-bold mb-2"
-                            htmlFor="Date"
-                        >
-                            Image
-                        </label>
-                        <input
-                            onChange={onImageChange}
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            name="image"
-                            id="date"
-                            type="text"
-                            placeholder="No image uploaded yet"
                             required
                         />
                     </div>
@@ -303,7 +285,22 @@ function UploadProject() {
                             id="message2"
                             type="text"
                             placeholder="Project's git"
-                            required
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label
+                            className="block text-gray-700 text-sm font-bold mb-2"
+                            htmlFor="name"
+                        >
+                            Position
+                        </label>
+                        <input
+                            onChange={onPositionChange}
+                            className="bshadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            name="position"
+                            id="message2"
+                            type="number"
+                            placeholder="Project's git"
                         />
                     </div>
                     <div className="flex w-full h-72 items-center justify-center bg-grey-lighter">
