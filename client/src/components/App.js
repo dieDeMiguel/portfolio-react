@@ -16,14 +16,15 @@ import axios from "axios";
 function App() {
     const [projects, setProjects] = useState([]);
 
-    const fetchProjects = async () => {
-        const projects = await axios.get("/api/projects");
-        setProjects(projects.data);
-    };
+    useEffect(() => {
+        console.log("cambios projects", projects);
+    }, [projects]);
 
     useEffect(() => {
-        fetchProjects();
-        //console.log("projects dentro de App", projects);
+        axios.get("/api/projects").then((response) => {
+            console.log("response dentro de app.js", response.data);
+            setProjects(response.data);
+        });
     }, []);
 
     return (
@@ -42,7 +43,7 @@ function App() {
                 <Route path="/projects">
                     <Projects projects={projects} />
                 </Route>
-                <Route
+                {/* <Route
                     path="/project/:slug"
                     render={(props) => (
                         <Project
@@ -50,7 +51,7 @@ function App() {
                             projects={projects}
                         />
                     )}
-                />
+                /> */}
                 <Route path="/crud/project" render={() => <UploadProject />} />
                 <Route path="/crud/about" render={() => <UploadAbout />} />
                 <Route path="/upload" render={() => <UploadMenu />} />

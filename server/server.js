@@ -51,7 +51,6 @@ app.post(
 
 app.post("/api/project", async (request, response) => {
     const project = request.body;
-    console.log("project dentro de server", project);
     const id = await createProject(project);
     if (!id) {
         response.statusCode = 400;
