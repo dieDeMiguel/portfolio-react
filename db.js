@@ -1,17 +1,5 @@
 var spicedPg = require("spiced-pg");
 const { genSalt, hash: bcryptHash } = require("bcryptjs");
-function serializeUser(usersList) {
-    return {
-        id: usersList.id,
-        firstName: usersList.first_name,
-        lastName: usersList.last_name,
-        profilePicURL: usersList.profilePicURL,
-    };
-}
-
-function hash(password) {
-    return genSalt().then((salt) => bcryptHash(password, salt));
-}
 
 function getDatabaseURL() {
     if (process.env.DATABASE_URL) {
@@ -19,10 +7,6 @@ function getDatabaseURL() {
     }
     const { username, password, database } = require("./secrets.json");
     return `postgres:${username}:${password}@localhost:5432/${database}`;
-}
-
-function dateFormatter(created_at) {
-    return created_at.toDateString();
 }
 
 const db = spicedPg(getDatabaseURL());
@@ -99,28 +83,13 @@ function getProjectBySlug({ slug }) {
 
 function getProjects() {
     return db
-        .query(`SELECT * FROM projects`)
-        .then((results) => results.rows[0]);
+        .query(`SELECT * FROM projects ORDER BY position DESC`)
+        .then((results) => results.rows);
 }
 
 function getAboutInfo() {
     return db.query(`SELECT * FROM about`).then((results) => results.rows[0]);
 }
-
-// const trialObject = {
-//     info: "hola",
-//     heading: "que tal",
-//     title: "como estas",
-//     img: "todo bien?",
-//     technologies: " si si",
-//     slug: " aca andamos",
-//     directory: "todo tranka",
-//     link: "en otras",
-//     date: "reeeeee",
-//     git: "bien",
-// };
-
-//createProject(trialObject).then((results) => console.log(results));
 
 module.exports = {
     getProjectBySlug,

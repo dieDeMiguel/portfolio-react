@@ -17,10 +17,6 @@ function App() {
     const [projects, setProjects] = useState([]);
 
     useEffect(() => {
-        console.log("cambios projects", projects);
-    }, [projects]);
-
-    useEffect(() => {
         axios.get("/api/projects").then((response) => {
             console.log("response dentro de app.js", response.data);
             setProjects(response.data);

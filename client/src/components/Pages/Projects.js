@@ -1,20 +1,10 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-
-function Projects() {
-    const [projects, setProjects] = useState([]);
-    useEffect(() => {
-        axios.get("/api/projects").then((response) => {
-            setProjects(response.data);
-        });
-    }, []);
-
+function Projects({ projects }) {
     return (
         <>
             <div className="sm:text-center lg:text-center mt-40">
                 <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl sm:text-2xl text-center">
                     <span className="block text-indigo-600 xl:inline">
-                        My projectList
+                        My Projects
                     </span>
                 </h1>
             </div>

@@ -3,7 +3,6 @@ const app = express();
 const compression = require("compression");
 const path = require("path");
 const { uploader } = require("./upload");
-const cryptoRandomString = require("crypto-random-string");
 const { s3upload, getURLFromFilename } = require("./s3");
 const { Bucket } = require("../config.json");
 
