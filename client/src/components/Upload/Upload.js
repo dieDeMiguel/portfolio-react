@@ -9,15 +9,18 @@ function Upload() {
             <div>
                 <BrowserRouter>
                     <h2>Upload Forms for Diego's Portfolio</h2>
-                    <Route path="/upload" render={() => <UploadMenu />} />
                     <Route
-                        path="/upload/project"
+                        path="upload/crud/project"
                         render={() => <UploadProject />}
                     />
                     <Route
-                        path="/upload/about"
+                        path="upload/crud/about"
                         render={() => <UploadAbout />}
                     />
+                    <Route path="/crud/trial">
+                        <ProfilePictureUploader />
+                    </Route>
+                    <Route path="/upload" render={() => <UploadMenu />} />
                 </BrowserRouter>
             </div>
         </>

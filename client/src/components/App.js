@@ -6,6 +6,10 @@ import Footer from "./Partials/Footer";
 import About from "./Pages/About";
 import Projects from "./Pages/Projects";
 import Project from "./Pages/Project";
+import UploadMenu from "../components/Upload/UploadMenu";
+import UploadProject from "../components/Upload/UploadProject";
+import UploadAbout from "../components/Upload/UploadAbout";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -47,6 +51,9 @@ function App() {
                         />
                     )}
                 />
+                <Route path="/crud/project" render={() => <UploadProject />} />
+                <Route path="/crud/about" render={() => <UploadAbout />} />
+                <Route path="/upload" render={() => <UploadMenu />} />
             </BrowserRouter>
             <Footer />
         </>

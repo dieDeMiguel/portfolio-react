@@ -21,23 +21,38 @@ function UploadProject() {
 
     function onFormSubmit(event) {
         event.preventDefault();
-        const project = {
-            info,
-            heading,
-            title,
-            image,
-            technologies,
-            slug,
-            subtitle,
-            date,
-            directory,
-            link,
-            git,
-            file,
-        };
+        const formData = new FormData();
+        formData.append("file", file);
         axios
-            .post("/api/project", project)
-            .then((results) => console.log("results", results));
+            .post("/upload-picture", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            })
+            .then((response) => {
+                console.log("response dentro de uploadProject", response);
+                axios
+                    .post("/api/project", {
+                        info: info,
+                        heading: heading,
+                        title: title,
+                        image: image,
+                        technologies: technologies,
+                        slug: slug,
+                        subtitle: subtitle,
+                        date: date,
+                        directory: directory,
+                        link: link,
+                        git: git,
+                        img: response.data.file,
+                    })
+                    .then((message) => {
+                        console.log(message);
+                    });
+            })
+            .catch((error) =>
+                console.error("error while uploading picture: ", error)
+            );
     }
 
     // Input value setter functions
@@ -116,7 +131,7 @@ function UploadProject() {
                             id="name"
                             type="text"
                             placeholder="Project's Info"
-                            // required
+                            required
                         />
                     </div>
 
@@ -134,7 +149,7 @@ function UploadProject() {
                             id="tel"
                             type="tel"
                             placeholder="Project's heading"
-                            // required
+                            required
                         />
                     </div>
 
@@ -152,7 +167,7 @@ function UploadProject() {
                             id="email"
                             type="text"
                             placeholder="Project's title"
-                            // required
+                            required
                         />
                     </div>
 
@@ -170,7 +185,7 @@ function UploadProject() {
                             id="date"
                             type="text"
                             placeholder="No image uploaded yet"
-                            // required
+                            required
                         />
                     </div>
 
@@ -205,7 +220,7 @@ function UploadProject() {
                             id="message2"
                             type="text"
                             placeholder="Project's slug"
-                            // required
+                            required
                         />
                     </div>
                     <div className="mb-4">
@@ -222,7 +237,7 @@ function UploadProject() {
                             id="message2"
                             type="text"
                             placeholder="Project's subtitle"
-                            // required
+                            required
                         />
                     </div>
                     <div className="mb-4">
@@ -239,7 +254,7 @@ function UploadProject() {
                             id="message2"
                             type="text"
                             placeholder="Project's date"
-                            // required
+                            required
                         />
                     </div>
                     <div className="mb-4">
@@ -288,7 +303,7 @@ function UploadProject() {
                             id="message2"
                             type="text"
                             placeholder="Project's git"
-                            // required
+                            required
                         />
                     </div>
                     <div className="flex w-full h-72 items-center justify-center bg-grey-lighter">
@@ -310,7 +325,7 @@ function UploadProject() {
                                 type="file"
                                 name="file"
                                 className="hidden"
-                                // required
+                                required
                             />
                             <button type="submit">Upload</button>
                         </label>

@@ -16,6 +16,7 @@ const {
 } = require("../db");
 
 app.use(compression());
+app.use(express.json());
 
 app.use(
     express.urlencoded({
@@ -38,22 +39,28 @@ app.get("/api/projects", async (request, response) => {
 });
 
 app.post(
-    "/api/project",
-
-    async (request, response) => {
-        const { project } = request.body;
-        console.log("dentro de db.js reques.body", project);
-        response.status(200).json(project);
-        // const id = await createProject(project);
-        // if (!id) {
-        //     response.statusCode = 400;
-        //     response.json({
-        //         message: "Something went wrong while creating the project",
-        //     });
-        // }
-        // response.json({ message: `Project created with id: ${id}` });
+    "/upload-picture",
+    uploader.single("file"),
+    s3upload,
+    (request, response) => {
+        const imageURL = getURLFromFilename(request.file.filename, Bucket);
+        console.log("bucket", request.file);
+        response.json(imageURL);
     }
 );
+
+app.post("/api/project", async (request, response) => {
+    const project = request.body;
+    console.log("project dentro de server", project);
+    const id = await createProject(project);
+    if (!id) {
+        response.statusCode = 400;
+        response.json({
+            message: "Something went wrong while creating the project",
+        });
+    }
+    response.json({ message: `Project created with id: ${id}` });
+});
 
 app.post("/api/project", async (request, response) => {
     const about = request.body;
