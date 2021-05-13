@@ -4,16 +4,13 @@ import axios from "axios";
 function Project({ slug, projects }) {
     projects = projects.filter((x) => x.slug != slug);
 
-    const [project, setProject] = useState([]);
-
-    const fetchProject = async () => {
-        const project = await axios.get(`/api/project/${slug}`);
-        project.data.directory = `/${project.data.directory}`;
-        setProject(project.data);
-    };
+    const [project, setProject] = useState({});
 
     useEffect(() => {
-        fetchProject();
+        axios.get(`/api/project/${slug}`).then((response) => {
+            console.log("response dentro de app.js", response.data);
+            setProject(response.data);
+        });
     }, []);
     return (
         <>
@@ -54,6 +51,7 @@ function Project({ slug, projects }) {
                                                             <p className="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 lg:mt-5">
                                                                 <a
                                                                     target="_blank"
+                                                                    rel="noreferrer"
                                                                     className="font-semibold text-blue-700 hover:text-blue-400"
                                                                     href={
                                                                         project.link
@@ -81,6 +79,7 @@ function Project({ slug, projects }) {
                                                             <p className="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 lg:mt-5">
                                                                 <a
                                                                     target="_blank"
+                                                                    rel="noreferrer"
                                                                     className="font-semibold text-blue-700 hover:text-blue-400"
                                                                     href={
                                                                         project.git

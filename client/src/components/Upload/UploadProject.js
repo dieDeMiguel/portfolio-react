@@ -35,10 +35,10 @@ function UploadProject() {
                     .post("/api/project", {
                         info: info,
                         heading: heading,
+                        subtitle: subtitle,
                         title: title,
                         technologies: technologies,
                         slug: slug,
-                        subtitle: subtitle,
                         date: date,
                         directory: directory,
                         link: link,

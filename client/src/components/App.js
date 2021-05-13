@@ -39,7 +39,7 @@ function App() {
                 <Route path="/projects">
                     <Projects projects={projects} />
                 </Route>
-                {/* <Route
+                <Route
                     path="/project/:slug"
                     render={(props) => (
                         <Project
@@ -47,7 +47,7 @@ function App() {
                             projects={projects}
                         />
                     )}
-                /> */}
+                />
                 <Route path="/crud/project" render={() => <UploadProject />} />
                 <Route path="/crud/about" render={() => <UploadAbout />} />
                 <Route path="/upload" render={() => <UploadMenu />} />

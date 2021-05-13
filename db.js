@@ -14,6 +14,7 @@ const db = spicedPg(getDatabaseURL());
 function createProject({
     info,
     heading,
+    subtitle,
     title,
     img,
     technologies,
@@ -26,10 +27,11 @@ function createProject({
 }) {
     return db
         .query(
-            "INSERT INTO projects (info, heading, title, img, technologies, slug, directory, link, date, git, position) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING id",
+            "INSERT INTO projects (info, heading, subtitle, title, img, technologies, slug, directory, link, date, git, position) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING id",
             [
                 info,
                 heading,
+                subtitle,
                 title,
                 img,
                 technologies,
