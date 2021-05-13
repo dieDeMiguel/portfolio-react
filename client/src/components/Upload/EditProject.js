@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
-function UploadProject({ projectSlug }) {
+function UploadProject({ projectSlug, history }) {
     const [project, setProject] = useState({});
     const [imageChange, setImageChange] = useState(false);
 
@@ -50,7 +50,7 @@ function UploadProject({ projectSlug }) {
                         .then((message) => {
                             console.log(message);
                             alert(`Project: ${project.title} was modified`);
-                            window.location = `/project/${project.slug}`;
+                            history.push(`edit/project/${project.slug}`);
                         });
                 })
                 .catch((error) =>
@@ -75,7 +75,7 @@ function UploadProject({ projectSlug }) {
                 .then((message) => {
                     console.log(message);
                     alert(`Project: ${project.title} was modified`);
-                    window.location = `/project/${project.slug}`;
+                    history.push(`edit/project/${project.slug}`);
                 });
         }
     }
@@ -374,7 +374,6 @@ function UploadProject({ projectSlug }) {
                                 type="file"
                                 name="file"
                                 className="hidden"
-                                required
                             />
                             <button type="submit">Upload</button>
                         </label>

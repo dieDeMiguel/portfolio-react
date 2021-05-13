@@ -61,7 +61,10 @@ function App() {
                     path={"/edit/project/:slug"}
                     exact
                     render={(props) => (
-                        <EditProject projectSlug={props.match.params.slug} />
+                        <EditProject
+                            projectSlug={props.match.params.slug}
+                            hisotry={props.history}
+                        />
                     )}
                 />
             </BrowserRouter>
