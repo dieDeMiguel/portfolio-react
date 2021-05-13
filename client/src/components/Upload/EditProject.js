@@ -5,16 +5,8 @@ function UploadProject({ projectSlug, history }) {
     const [project, setProject] = useState({});
     const [imageChange, setImageChange] = useState(false);
 
-    // useEffect(() => {
-    //     console.log("dentro de ediiiiiit", project.file);
-    // }, [project]);
-
     useEffect(() => {
         axios.get(`/api/project/${projectSlug}`).then((result) => {
-            console.log(
-                "response dentro del then del axios de Edit Project",
-                result.data
-            );
             setProject(result.data);
         });
     }, []);
@@ -31,7 +23,6 @@ function UploadProject({ projectSlug, history }) {
                     },
                 })
                 .then((response) => {
-                    console.log("response dentro de uploadProject", response);
                     axios
                         .put(`/api/project/${projectSlug}`, {
                             info: project.info,
@@ -47,8 +38,7 @@ function UploadProject({ projectSlug, history }) {
                             position: project.position,
                             img: response.data,
                         })
-                        .then((message) => {
-                            console.log(message);
+                        .then(() => {
                             alert(`Project: ${project.title} was modified`);
                             history.push(`edit/project/${project.slug}`);
                         });
@@ -72,8 +62,7 @@ function UploadProject({ projectSlug, history }) {
                     position: project.position,
                     img: project.img,
                 })
-                .then((message) => {
-                    console.log(message);
+                .then(() => {
                     alert(`Project: ${project.title} was modified`);
                     history.push(`edit/project/${project.slug}`);
                 });

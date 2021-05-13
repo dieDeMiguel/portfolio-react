@@ -20,7 +20,6 @@ function App() {
 
     useEffect(() => {
         axios.get("/api/projects").then((response) => {
-            console.log("projects dentro de app.js", response.data);
             setProjects(response.data);
         });
     }, []);
