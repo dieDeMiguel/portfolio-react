@@ -13,6 +13,7 @@ const {
     createAbout,
     getProjectBySlug,
     getAboutInfo,
+    editProject,
 } = require("../db");
 
 app.use(compression());
@@ -36,6 +37,13 @@ app.get("/api/projects", async (request, response) => {
         return;
     }
     response.json(projects);
+});
+
+app.put("/api/project/:slug", async (request, response) => {
+    const prevSlug = request.params.slug;
+    const editedProject = request.body;
+    await editProject({ ...editedProject, prevSlug });
+    response.status(200).json({ message: `Project ${prevSlug} was updated` });
 });
 
 app.post(

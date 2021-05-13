@@ -3,60 +3,81 @@ import axios from "axios";
 
 function UploadProject({ projectSlug }) {
     const [project, setProject] = useState({});
-    const [loading, setLoading] = useState(false);
+    const [imageChange, setImageChange] = useState(false);
 
     // useEffect(() => {
     //     console.log("dentro de ediiiiiit", project.file);
     // }, [project]);
 
     useEffect(() => {
-        setLoading(true);
         axios.get(`/api/project/${projectSlug}`).then((result) => {
             console.log(
                 "response dentro del then del axios de Edit Project",
                 result.data
             );
             setProject(result.data);
-            setLoading(false);
         });
     }, []);
 
     function onFormSubmit(event) {
         event.preventDefault();
-        const formData = new FormData();
-        formData.append("file", project.file);
-        axios
-            .post("/upload-picture", formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                },
-            })
-            .then((response) => {
-                console.log("response dentro de uploadProject", response);
-                axios
-                    .put(`/api/project/${projectSlug}`, {
-                        info: project.info,
-                        heading: project.heading,
-                        subtitle: project.subtitle,
-                        title: project.title,
-                        technologies: project.technologies,
-                        slug: project.slug,
-                        date: project.date,
-                        directory: project.directory,
-                        link: project.link,
-                        git: project.git,
-                        position: project.position,
-                        img: response.data,
-                    })
-                    .then((message) => {
-                        console.log(message);
-                        alert(`Project: ${project.title} was modified`);
-                        window.location = "/upload";
-                    });
-            })
-            .catch((error) =>
-                console.error("error while uploading picture: ", error)
-            );
+        if (imageChange) {
+            const formData = new FormData();
+            formData.append("file", project.file);
+            axios
+                .post("/upload-picture", formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                })
+                .then((response) => {
+                    console.log("response dentro de uploadProject", response);
+                    axios
+                        .put(`/api/project/${projectSlug}`, {
+                            info: project.info,
+                            heading: project.heading,
+                            subtitle: project.subtitle,
+                            title: project.title,
+                            technologies: project.technologies,
+                            slug: project.slug,
+                            date: project.date,
+                            directory: project.directory,
+                            link: project.link,
+                            git: project.git,
+                            position: project.position,
+                            img: response.data,
+                        })
+                        .then((message) => {
+                            console.log(message);
+                            alert(`Project: ${project.title} was modified`);
+                            window.location = `/project/${project.slug}`;
+                        });
+                })
+                .catch((error) =>
+                    console.error("error while uploading picture: ", error)
+                );
+        } else {
+            axios
+                .put(`/api/project/${projectSlug}`, {
+                    info: project.info,
+                    heading: project.heading,
+                    subtitle: project.subtitle,
+                    title: project.title,
+                    technologies: project.technologies,
+                    slug: project.slug,
+                    date: project.date,
+                    directory: project.directory,
+                    link: project.link,
+                    git: project.git,
+                    position: project.position,
+                    img: project.img,
+                })
+                .then((message) => {
+                    console.log(message);
+                    alert(`Project: ${project.title} was modified`);
+                    window.location = `/project/${project.slug}`;
+                });
+        }
     }
 
     return (
@@ -343,12 +364,13 @@ function UploadProject({ projectSlug }) {
                             </span>
 
                             <input
-                                onChange={(event) =>
+                                onChange={(event) => {
                                     setProject({
                                         ...project,
                                         file: event.target.files[0],
-                                    })
-                                }
+                                    });
+                                    setImageChange(true);
+                                }}
                                 type="file"
                                 name="file"
                                 className="hidden"

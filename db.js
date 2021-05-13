@@ -98,7 +98,47 @@ function deleteProjectBySlug({ slug }) {
     return db.query(`DELETE FROM projects WHERE slug = $1`, [slug]);
 }
 
+function editProject({
+    info,
+    heading,
+    subtitle,
+    title,
+    img,
+    technologies,
+    slug,
+    directory,
+    link,
+    date,
+    git,
+    position,
+    prevSlug,
+}) {
+    return db.query(
+        `
+        UPDATE projects
+        SET info = $1, heading = $2, subtitle = $3, title = $4, img = $5, technologies = $6, slug = $7, directory = $8, link = $9, date = $10, git = $11, position = $12
+        WHERE slug = $13
+        `,
+        [
+            info,
+            heading,
+            subtitle,
+            title,
+            img,
+            technologies,
+            slug,
+            directory,
+            link,
+            date,
+            git,
+            position,
+            prevSlug,
+        ]
+    );
+}
+
 module.exports = {
+    editProject,
     deleteProjectBySlug,
     getProjectBySlug,
     getProjects,
