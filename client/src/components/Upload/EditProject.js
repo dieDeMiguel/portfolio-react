@@ -349,7 +349,13 @@ function UploadProject({ projectSlug, history }) {
                             placeholder="Project's git"
                         />
                     </div>
-                    <div className="flex w-full h-72 items-center justify-center bg-grey-lighter">
+                    <div className="flex flex-col w-full h-72 items-center justify-center bg-grey-lighter">
+                        <div className="">
+                            <img
+                                src={project.img}
+                                style={{ maxWidth: "200px" }}
+                            />
+                        </div>
                         <label className="w-64 flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-white">
                             <svg
                                 className="w-8 h-8"
