@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function UploadProject() {
+function UploadProject({ projectSlug }) {
+    console.log("projectSlug dentro de EditProject", projectSlug);
+    const [project, setProject] = useState({});
     const [info, setInfo] = useState("");
     const [heading, setHeading] = useState("");
     const [title, setTitle] = useState("");
@@ -14,6 +16,16 @@ function UploadProject() {
     const [git, setGit] = useState("");
     const [position, setPosition] = useState("");
     const [file, setFile] = useState("");
+
+    useEffect(() => {
+        axios.get(`/api/project/${projectSlug}`).then((result) => {
+            console.log(
+                "response dentro del then del axio de Edit Project",
+                result.data
+            );
+            setProject(result.data);
+        });
+    }, []);
 
     function onFormSubmit(event) {
         event.preventDefault();
@@ -112,7 +124,7 @@ function UploadProject() {
                 >
                     <br />
                     <h1 className="block text-gray-700 font-bold mb-2 text-xl text-center">
-                        Project Upload
+                        Edit Project
                     </h1>
                     <br />
                     <div className="mb-4">
@@ -129,6 +141,7 @@ function UploadProject() {
                             id="name"
                             type="text"
                             placeholder="Project's Info"
+                            value={project.info}
                             required
                         />
                     </div>
@@ -147,6 +160,7 @@ function UploadProject() {
                             id="tel"
                             type="tel"
                             placeholder="Project's heading"
+                            value={project.heading}
                             required
                         />
                     </div>
@@ -165,6 +179,7 @@ function UploadProject() {
                             id="email"
                             type="text"
                             placeholder="Project's title"
+                            value={project.title}
                             required
                         />
                     </div>
@@ -182,6 +197,7 @@ function UploadProject() {
                             name="technologies"
                             id="message1"
                             type="text"
+                            value={project.technologies}
                             placeholder="Project's technologies"
                         ></input>
                     </div>
@@ -200,6 +216,7 @@ function UploadProject() {
                             id="message2"
                             type="text"
                             placeholder="Project's slug"
+                            value={project.slug}
                             required
                         />
                     </div>
@@ -217,6 +234,7 @@ function UploadProject() {
                             id="message2"
                             type="text"
                             placeholder="Project's subtitle"
+                            value={project.subtitle}
                             required
                         />
                     </div>
@@ -234,6 +252,7 @@ function UploadProject() {
                             id="message2"
                             type="text"
                             placeholder="Project's date"
+                            value={project.date}
                             required
                         />
                     </div>
@@ -251,6 +270,7 @@ function UploadProject() {
                             id="message2"
                             type="text"
                             placeholder="Project's directory"
+                            value={project.directory}
                         />
                     </div>
                     <div className="mb-4">
@@ -266,6 +286,7 @@ function UploadProject() {
                             name="link"
                             id="message2"
                             type="text"
+                            value={project.link}
                             placeholder="Project's link"
                         />
                     </div>
@@ -282,6 +303,7 @@ function UploadProject() {
                             name="git"
                             id="message2"
                             type="text"
+                            value={project.git}
                             placeholder="Project's git"
                         />
                     </div>
@@ -298,10 +320,11 @@ function UploadProject() {
                             name="position"
                             id="message2"
                             type="number"
+                            value={project.position}
                             placeholder="Project's git"
                         />
                     </div>
-                    <div className="flex w-full h-72 items-center justify-center bg-grey-lighter">
+                    {/* <div className="flex w-full h-72 items-center justify-center bg-grey-lighter">
                         <label className="w-64 flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-white">
                             <svg
                                 className="w-8 h-8"
@@ -324,7 +347,7 @@ function UploadProject() {
                             />
                             <button type="submit">Upload</button>
                         </label>
-                    </div>
+                    </div> */}
                     <div className="flex items-center justify-between">
                         <button
                             style={{ margin: "0 auto" }}

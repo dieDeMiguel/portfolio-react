@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 function Project({ slug, projects }) {
+    console.log("slug dentro de Project.js", slug);
     projects = projects.filter((x) => x.slug != slug);
 
     const [project, setProject] = useState({});
 
     useEffect(() => {
         axios.get(`/api/project/${slug}`).then((response) => {
-            console.log("response dentro de app.js", response.data);
+            console.log("response dentro de Project.js", response.data);
             setProject(response.data);
         });
     }, []);

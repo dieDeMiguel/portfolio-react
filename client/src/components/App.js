@@ -10,6 +10,7 @@ import UploadMenu from "../components/Upload/UploadMenu";
 import UploadProject from "../components/Upload/UploadProject";
 import UploadAbout from "../components/Upload/UploadAbout";
 import ProjectsList from "../components/Upload/ProjectsList";
+import EditProject from "../components/Upload/EditProject";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -19,7 +20,7 @@ function App() {
 
     useEffect(() => {
         axios.get("/api/projects").then((response) => {
-            console.log("response dentro de app.js", response.data);
+            console.log("projects dentro de app.js", response.data);
             setProjects(response.data);
         });
     }, []);
@@ -56,6 +57,13 @@ function App() {
                 />
                 <Route path="/crud/about" render={() => <UploadAbout />} />
                 <Route path="/upload" render={() => <UploadMenu />} />
+                <Route
+                    path={"/edit/project/:slug"}
+                    exact
+                    render={(props) => (
+                        <EditProject projectSlug={props.match.params.slug} />
+                    )}
+                />
             </BrowserRouter>
             <Footer />
         </>
