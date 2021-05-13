@@ -93,7 +93,13 @@ function getAboutInfo() {
     return db.query(`SELECT * FROM about`).then((results) => results.rows[0]);
 }
 
+function deleteProjectBySlug({ slug }) {
+    console.log("entro a db.js");
+    return db.query(`DELETE FROM projects WHERE slug = $1`, [slug]);
+}
+
 module.exports = {
+    deleteProjectBySlug,
     getProjectBySlug,
     getProjects,
     getAboutInfo,

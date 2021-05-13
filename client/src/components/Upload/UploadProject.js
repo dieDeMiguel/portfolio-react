@@ -48,6 +48,8 @@ function UploadProject() {
                     })
                     .then((message) => {
                         console.log(message);
+                        alert(`Project: ${title} was uploaded`);
+                        window.location = "/upload";
                     });
             })
             .catch((error) =>
@@ -178,14 +180,14 @@ function UploadProject() {
                         >
                             Technologies
                         </label>
-                        <textarea
+                        <input
                             onChange={onTechnologiesChange}
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             name="technologies"
                             id="message1"
                             type="text"
                             placeholder="Project's technologies"
-                        ></textarea>
+                        ></input>
                     </div>
 
                     <div className="mb-4">

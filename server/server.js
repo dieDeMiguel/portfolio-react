@@ -8,6 +8,7 @@ const { Bucket } = require("../config.json");
 
 const {
     createProject,
+    deleteProjectBySlug,
     getProjects,
     createAbout,
     getProjectBySlug,
@@ -47,6 +48,13 @@ app.post(
         response.json(imageURL);
     }
 );
+
+app.delete("/project/:slug", async (request, response) => {
+    const slug = request.params.slug;
+    console.log("entroooo", slug);
+    await deleteProjectBySlug({ slug });
+    response.status(200).json({ message: `Project: ${slug} deleted` });
+});
 
 app.post("/api/project", async (request, response) => {
     const project = request.body;
