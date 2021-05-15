@@ -46,7 +46,7 @@ function createProject({
         .then((result) => result.rows[0].id);
 }
 
-function createAbout({
+function editAbout({
     first_paragraph,
     second_paragraph,
     third_paragraph,
@@ -58,9 +58,10 @@ function createAbout({
     last_paragraph,
     long_paragraph,
 }) {
+    console.log("dentro de DB.js", first_paragraph);
     return db
         .query(
-            "INSERT INTO projects (first_paragraph, second_paragraph, third_paragraph, fourth_paragraph, image_first_row, image_second_row, third_banner, fourth_banner, last_paragraph,long_paragraph,) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id",
+            "UPDATE about SET first_paragraph = $1, second_paragraph = $2, third_paragraph = $3, fourth_paragraph = $4, image_first_row = $5, image_second_row = $6, third_banner = $7, fourth_banner = $8, last_paragraph = $9, long_paragraph = $10  WHERE id = 1 RETURNING id",
             [
                 first_paragraph,
                 second_paragraph,
@@ -90,11 +91,12 @@ function getProjects() {
 }
 
 function getAboutInfo() {
-    return db.query(`SELECT * FROM about`).then((results) => results.rows[0]);
+    return db
+        .query(`SELECT * FROM about WHERE id = 1`)
+        .then((results) => results.rows[0]);
 }
 
 function deleteProjectBySlug({ slug }) {
-    console.log("entro a db.js");
     return db.query(`DELETE FROM projects WHERE slug = $1`, [slug]);
 }
 
@@ -144,5 +146,5 @@ module.exports = {
     getProjects,
     getAboutInfo,
     createProject,
-    createAbout,
+    editAbout,
 };
