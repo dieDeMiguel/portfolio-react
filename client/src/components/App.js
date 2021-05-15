@@ -8,7 +8,7 @@ import Projects from "./Pages/Projects";
 import Project from "./Pages/Project";
 import UploadMenu from "../components/Upload/UploadMenu";
 import UploadProject from "../components/Upload/UploadProject";
-import UploadAbout from "../components/Upload/UploadAbout";
+import UploadAboutPage from "../components/Upload/UploadAbout";
 import ProjectsList from "../components/Upload/ProjectsList";
 import EditProject from "../components/Upload/EditProject";
 
@@ -54,7 +54,7 @@ function App() {
                     path="/edit/projects"
                     render={() => <ProjectsList projects={projects} />}
                 />
-                <Route path="/crud/about" render={() => <UploadAbout />} />
+                <Route path="/crud/about" render={() => <UploadAboutPage />} />
                 <Route path="/upload" render={() => <UploadMenu />} />
                 <Route
                     path={"/edit/project/:slug"}

@@ -10,10 +10,10 @@ const {
     createProject,
     deleteProjectBySlug,
     getProjects,
-    createAbout,
     getProjectBySlug,
     getAboutInfo,
     editProject,
+    editAbout,
 } = require("../db");
 
 app.use(compression());
@@ -27,6 +27,20 @@ app.use(
 
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
 
+// Image Upload
+
+app.post(
+    "/upload-picture",
+    uploader.single("file"),
+    s3upload,
+    (request, response) => {
+        const imageURL = getURLFromFilename(request.file.filename, Bucket);
+        console.log("bucket", request.file);
+        response.json(imageURL);
+    }
+);
+
+// Projects
 app.get("/api/projects", async (request, response) => {
     const projects = await getProjects();
     if (!projects) {
@@ -45,17 +59,6 @@ app.put("/api/project/:slug", async (request, response) => {
     await editProject({ ...editedProject, prevSlug });
     response.status(200).json({ message: `Project ${prevSlug} was updated` });
 });
-
-app.post(
-    "/upload-picture",
-    uploader.single("file"),
-    s3upload,
-    (request, response) => {
-        const imageURL = getURLFromFilename(request.file.filename, Bucket);
-        console.log("bucket", request.file);
-        response.json(imageURL);
-    }
-);
 
 app.delete("/project/:slug", async (request, response) => {
     const slug = request.params.slug;
@@ -99,6 +102,30 @@ app.get("/api/project/:slug", async (request, response) => {
         return;
     }
     response.json(project);
+});
+
+//About
+
+app.post("/api/about", async (request, response) => {
+    const about = request.body;
+    console.log("about dentro de server.js", about);
+    const _id = await editAbout({ ...about });
+    if (!_id) {
+        response
+            .status(400)
+            .json({ message: "something went wrong while updating about" });
+    }
+    response.json({ message: `succes, project with id: ${_id}` });
+});
+
+app.get("/api/about", async (request, response) => {
+    const about = await getAboutInfo();
+    if (!about) {
+        response.status(400).json({
+            message: "Something went wrong while fetching about info",
+        });
+    }
+    response.json(about);
 });
 
 app.get("/api/about", async (request, response) => {

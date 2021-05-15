@@ -10,7 +10,7 @@ function UploadMenu() {
                 <p>Edit Projects</p>
             </Link>
             <Link to="/crud/about">
-                <p>Upload About info</p>
+                <p>Edit About info</p>
             </Link>
         </>
     );

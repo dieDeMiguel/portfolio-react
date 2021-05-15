@@ -11,6 +11,8 @@ body {
 .spiced-search {
     position: relative;
     padding: 2rem 2rem;
+    text-align: center;
+    margin-top: 10rem;
 }
 
 input {
@@ -18,9 +20,7 @@ input {
 }
 
 .spiced-search .suggestions {
-    position: absolute;
-    top: 0;
-    top: 40px;
+    margin: 0 auto;
     left: 2rem;
     width: 300px;
     border: 1px solid blue;
