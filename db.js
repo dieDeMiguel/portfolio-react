@@ -57,7 +57,6 @@ function editAbout({
     last_paragraph,
     long_paragraph,
 }) {
-    console.log("dentro de DB.js", first_paragraph);
     return db
         .query(
             "UPDATE about SET first_paragraph = $1, second_paragraph = $2, third_paragraph = $3, fourth_paragraph = $4, image_first_row = $5, image_second_row = $6, third_banner = $7, fourth_banner = $8, last_paragraph = $9, long_paragraph = $10  WHERE id = 1 RETURNING id",
@@ -141,8 +140,6 @@ function editProject({
 function uploadAboutImage(object) {
     const column = Object.keys(object)[0];
     const imageURL = object[column];
-    console.log("dentro de db.js column", column);
-    console.log("dentro de db.js imageURL", imageURL);
     return db
         .query(`UPDATE about SET ${column} = $1 WHERE id = 1 RETURNING id`, [
             imageURL,
