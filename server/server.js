@@ -97,7 +97,6 @@ app.get("/api/project/:slug", async (request, response) => {
 
 app.post("/api/about", async (request, response) => {
     const about = request.body;
-    console.log("about dentro de server.js", about);
     const _id = await editAbout({ ...about });
     if (!_id) {
         response
@@ -109,7 +108,6 @@ app.post("/api/about", async (request, response) => {
 
 app.post("/api/image/about", async (request, response) => {
     const obj = request.body;
-    console.log("dentro del server e objeto", obj);
     const _id = await uploadAboutImage(obj);
     if (!_id) {
         response.status(400).json({
@@ -127,6 +125,7 @@ app.get("/api/about", async (request, response) => {
             message: "Something went wrong while fetching about info",
         });
     }
+    console.log("dentro de db.js", about);
     response.json(about);
 });
 

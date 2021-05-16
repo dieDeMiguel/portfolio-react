@@ -6,7 +6,8 @@ function About() {
 
     const fetchAboutInfo = async () => {
         const aboutInfo = await axios.get("/api/about");
-        setAboutInfo(aboutInfo.data[0]);
+        console.log("dentro de about.js", aboutInfo.data.first_banner);
+        setAboutInfo(aboutInfo.data);
     };
     useEffect(() => {
         fetchAboutInfo();
@@ -15,7 +16,7 @@ function About() {
         <>
             <div
                 className="fixed-background py-36"
-                style={{ backgroundImage: `url(${aboutInfo.firstBanner})` }}
+                style={{ backgroundImage: `url(${aboutInfo.first_banner})` }}
                 id="about"
             >
                 <main
@@ -42,12 +43,12 @@ function About() {
             <div className="lower-about mb-20">
                 <div className="first-row flex flex-col lg:flex-row justify-center items-center lg:mt-40 my-12">
                     <div className="text-first-row max-w-lg mx-2 mr-4">
-                        <p>{aboutInfo.firstParagraph}</p>
+                        <p>{aboutInfo.first_paragraph}</p>
                     </div>
                     <div
                         className="image-first-row my-12"
                         style={{
-                            backgroundImage: `url(${aboutInfo.imageFirstRow})`,
+                            backgroundImage: `url(${aboutInfo.image_first_row})`,
                         }}
                     ></div>
                 </div>
@@ -55,17 +56,17 @@ function About() {
                     <div
                         className="image-second-row"
                         style={{
-                            backgroundImage: `url(${aboutInfo.secondBanner})`,
+                            backgroundImage: `url(${aboutInfo.second_banner})`,
                         }}
                     ></div>
                     <div className="text-second-row my-12 mx-2 max-w-lg mx-2 ml-4">
-                        <p>{aboutInfo.secondParagraph}</p>
+                        <p>{aboutInfo.second_paragraph}</p>
                     </div>
                 </div>
             </div>
             <div
                 className="fixed-background py-36"
-                style={{ backgroundImage: `url(${aboutInfo.thirdBanner})` }}
+                style={{ backgroundImage: `url(${aboutInfo.third_banner})` }}
                 id="about"
             >
                 <main
@@ -85,7 +86,7 @@ function About() {
                 </main>
             </div>
             <div className="about-paragraph m-auto lg:max-w-2xl text-center my-36 mx-auto sm:mx-auto mt-20">
-                <p>{aboutInfo.longParagraph}</p>
+                {/* <p>{aboutInfo.long_paragraph}</p> */}
             </div>
             <div className="lower-about mb-20">
                 <div className="text-first-row max-w-xl mb-4 text-2xl mx-auto text-center">
@@ -95,22 +96,22 @@ function About() {
                     <div
                         className="image-first-row mt-4"
                         style={{
-                            backgroundImage: `url(${aboutInfo.fourthBanner})`,
+                            backgroundImage: `url(${aboutInfo.fourth_banner})`,
                         }}
                     ></div>
                     <div className="text-first-row  my-12  max-w-lg mx-2 ml-4">
-                        <p>{aboutInfo.fourthParagraph}</p>
+                        <p>{aboutInfo.fourth_paragraph}</p>
                     </div>
                 </div>
                 <div className="first-row flex flex-col lg:flex-row  justify-center items-center lg:mt-40 lg:mb-40">
                     <div
                         className="image-second-row"
                         style={{
-                            backgroundImage: `url(${aboutInfo.imageSecondRow})`,
+                            backgroundImage: `url(${aboutInfo.image_second_row})`,
                         }}
                     ></div>
                     <div className="text-second-row   my-12 max-w-lg mx-2 mr-4">
-                        <p>{aboutInfo.thirdParagraph}</p>
+                        <p>{aboutInfo.third_paragraph}</p>
                     </div>
                 </div>
             </div>
