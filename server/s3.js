@@ -2,17 +2,20 @@ const { S3 } = require("aws-sdk");
 const fs = require("fs");
 const { Bucket } = require("../config.json");
 
-let secrets;
-if (process.env.NODE_ENV) {
-    secrets = process.env;
+let AWS_KEY;
+let AWS_SECRET;
+if (process.env.AWS_KEY && process.env.AWS_SECRET) {
+    AWS_KEY = process.env.AWS_KEY;
+    AWS_SECRET = process.env.AWS_SECRET;
 } else {
-    secrets = require("../config.json");
+    AWS_KEY = require("../config.json");
+    AWS_SECRET = require("../config.json");
 }
 
 // require the secrets the way you want
 const s3 = new S3({
-    accessKeyId: secrets.AWS_KEY,
-    secretAccessKey: secrets.AWS_SECRET,
+    accessKeyId: AWS_KEY,
+    secretAccessKey: AWS_SECRET,
 });
 
 // it's a middleware: in the name of the request, the response and the next

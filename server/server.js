@@ -4,7 +4,12 @@ const compression = require("compression");
 const path = require("path");
 const { uploader } = require("./upload");
 const { s3upload, getURLFromFilename } = require("./s3");
-const { Bucket } = require("../config.json");
+let Bucket;
+if (process.env.Bucket) {
+    Bucket = process.env.Bucket;
+} else {
+    Bucket = require("../config.json");
+}
 
 const {
     createProject,

@@ -1,5 +1,4 @@
 var spicedPg = require("spiced-pg");
-const { genSalt, hash: bcryptHash } = require("bcryptjs");
 
 function getDatabaseURL() {
     if (process.env.DATABASE_URL) {
