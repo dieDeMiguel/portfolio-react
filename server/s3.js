@@ -12,7 +12,6 @@ if (process.env.AWS_KEY && process.env.AWS_SECRET) {
     AWS_SECRET = require("../config.json");
 }
 
-// require the secrets the way you want
 const s3 = new S3({
     accessKeyId: AWS_KEY,
     secretAccessKey: AWS_SECRET,
