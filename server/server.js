@@ -8,7 +8,7 @@ let Bucket;
 if (process.env.Bucket) {
     Bucket = process.env.Bucket;
 } else {
-    Bucket = require("../config.json");
+    //Bucket = require("../config.json");
 }
 
 const {

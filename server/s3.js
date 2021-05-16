@@ -8,8 +8,8 @@ if (process.env.AWS_KEY && process.env.AWS_SECRET) {
     AWS_KEY = process.env.AWS_KEY;
     AWS_SECRET = process.env.AWS_SECRET;
 } else {
-    AWS_KEY = require("../config.json");
-    AWS_SECRET = require("../config.json");
+    // AWS_KEY = require("../config.json");
+    // AWS_SECRET = require("../config.json");
 }
 
 const s3 = new S3({
