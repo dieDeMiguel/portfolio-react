@@ -40,7 +40,7 @@ function ProjectsList({ projects }) {
                                         <Link
                                             to={`/edit/project/${project.slug}`}
                                         >
-                                            Update Project
+                                            Edit Project
                                         </Link>
                                     </div>
                                     <div className="w-1/4 text-wrap text-center flex text-white text-bold flex-col rounded-md bg-red-500 justify-center items-center mr-10 p-2">

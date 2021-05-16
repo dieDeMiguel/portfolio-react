@@ -7,7 +7,7 @@ body {
 }
 
 .fixed-background {
-    background: url("/contact.jpeg");
+    background: url("/contact.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: right;
