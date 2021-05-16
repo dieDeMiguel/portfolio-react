@@ -4,9 +4,11 @@ const fs = require("fs");
 
 let AWS_KEY;
 let AWS_SECRET;
+let Bucket;
 if (process.env.AWS_KEY && process.env.AWS_SECRET) {
     AWS_KEY = process.env.AWS_KEY;
     AWS_SECRET = process.env.AWS_SECRET;
+    Bucket = process.env.Bucket;
 } else {
     // AWS_KEY = require("../config.json");
     // AWS_SECRET = require("../config.json");
