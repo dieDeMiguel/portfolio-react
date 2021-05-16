@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS about;
 CREATE TABLE projects (
     id SERIAL PRIMARY KEY,
     info TEXT NOT NULL,
+    subtitle TEXT,
     heading VARCHAR(255) NOT NULL,
     title VARCHAR(255) NOT NULL,
     img VARCHAR(255),
