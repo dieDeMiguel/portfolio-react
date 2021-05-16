@@ -3,9 +3,14 @@ import axios from "axios";
 
 function UploadAboutPage() {
     const [about, setAbout] = useState("");
-    const [imageChange, setImageChange] = useState(false);
+    const [imageColumn, setImageColumn] = useState(false);
+    const [file, setFile] = useState({});
 
-    useEffect(() =>
+    function isEmpty(obj) {
+        return Object.keys(obj).length === 0 && obj.constructor === Object;
+    }
+
+    useEffect(() => {
         axios
             .get("/api/about")
             .then((response) => {
@@ -13,14 +18,14 @@ function UploadAboutPage() {
             })
             .catch((error) =>
                 console.log("error while fetching about info", error)
-            )
-    );
+            );
+    }, []);
 
     function onImageFormSubmit(event) {
         event.preventDefault();
-        if (imageChange) {
+        if (!isEmpty(file) && imageColumn) {
             const formData = new FormData();
-            formData.append(about.column, about.file);
+            formData.append("file", file);
             axios
                 .post("/upload-picture", formData, {
                     headers: {
@@ -28,14 +33,14 @@ function UploadAboutPage() {
                     },
                 })
                 .then((response) => {
-                    var key = about.column;
+                    var key = imageColumn.value;
                     var object = {};
-                    object[key] = response;
-                    axios.put(`/api/about`, object).then(() => {
+                    object[key] = response.data;
+                    axios.post(`/api/image/about`, object).then(() => {
                         alert(
-                            `The follwong column in about was uploaded: ${about.column}`
+                            `The follwing column in about was uploaded: ${key}`
                         );
-                        window.location = "/upload";
+                        history.push(`/crud/about`);
                     });
                 })
                 .catch((error) =>
@@ -46,15 +51,13 @@ function UploadAboutPage() {
 
     function onFormSubmit(event) {
         event.preventDefault();
-        console.log("entroooo");
         axios
             .post("/api/about", {
                 ...about,
             })
             .then((message) => {
-                console.log(message);
-                alert(`About parapraphs were uploaded`);
-                window.location = "/upload";
+                alert(`About parapraphs were uploaded:`, message);
+                history.push(`/crud/about`);
             })
             .catch((error) =>
                 console.error("error while uploading about paragraphs: ", error)
@@ -82,12 +85,12 @@ function UploadAboutPage() {
                             First Paragraph
                         </label>
                         <input
-                            onChange={(event) => {
+                            onChange={(event) =>
                                 setAbout({
                                     ...about,
                                     first_paragraph: event.target.value,
-                                });
-                            }}
+                                })
+                            }
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             name="info"
                             id="name"
@@ -106,12 +109,12 @@ function UploadAboutPage() {
                             Second Paragraph
                         </label>
                         <input
-                            onChange={(event) => {
+                            onChange={(event) =>
                                 setAbout({
                                     ...about,
                                     second_paragraph: event.target.value,
-                                });
-                            }}
+                                })
+                            }
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             name="heading"
                             id="tel"
@@ -201,12 +204,12 @@ function UploadAboutPage() {
                             Long Paragraph
                         </label>
                         <input
-                            onChange={(event) => {
+                            onChange={(event) =>
                                 setAbout({
                                     ...about,
                                     long_paragraph: event.target.value,
-                                });
-                            }}
+                                })
+                            }
                             className="bshadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             name="subtitle"
                             id="message2"
@@ -237,21 +240,6 @@ function UploadAboutPage() {
                         About Page Image Upload
                     </h1>
                     <br />
-                    <div className="flex w-full h-72 items-center justify-center bg-grey-lighter">
-                        <label className="w-64 flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-white">
-                            <svg
-                                className="w-8 h-8"
-                                fill="currentColor"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20"
-                            >
-                                <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
-                            </svg>
-                            <span className="mt-2 text-base leading-normal">
-                                Upload an Image for the about Page
-                            </span>
-                        </label>
-                    </div>
 
                     <div className="flex flex-col w-full h-72 items-center justify-center bg-grey-lighter">
                         <label className="w-64 flex flex-col items-center px-4 py-6 bg-white text-blue border">
@@ -260,15 +248,17 @@ function UploadAboutPage() {
                             </span>
 
                             <select
-                                onChange={(value) => {
-                                    setAbout({
-                                        ...about,
-                                        column: value,
+                                onChange={(event) => {
+                                    setImageColumn({
+                                        value: event.target.value,
                                     });
                                 }}
-                                value={about.column || ""}
+                                value={about.column}
                                 required
                             >
+                                <option value="">
+                                    Please Select One Image Column
+                                </option>
                                 <option value="image_first_row">
                                     image_first_row
                                 </option>
@@ -288,19 +278,31 @@ function UploadAboutPage() {
                                     fourth_banner
                                 </option>
                             </select>
+                        </label>
+                    </div>
+                    <div className="flex flex-col w-full h-72 items-center justify-center bg-grey-lighter">
+                        <label className="w-64 flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue">
+                            <svg
+                                className="w-8 h-8"
+                                fill="currentColor"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                            >
+                                <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+                            </svg>
+                            <span className="mt-2 text-base leading-normal">
+                                Select a file
+                            </span>
 
                             <input
                                 onChange={(event) => {
-                                    setAbout({
-                                        ...about,
-                                        file: event.target.files[0],
-                                    });
-                                    setImageChange(true);
+                                    setFile(event.target.files[0]);
                                 }}
                                 type="file"
                                 name="file"
                                 className="hidden"
                             />
+                            <button type="submit">Upload</button>
                         </label>
                     </div>
                     <div className="flex items-center justify-between">
@@ -319,8 +321,6 @@ function UploadAboutPage() {
                 src="https://kit.fontawesome.com/1e268974cb.js"
                 crossOrigin="anonymous"
             ></script>
-            <script src="assets/js/helpers.js"></script>
-            <script src="assets/js/whatsapp.js"></script>
         </>
     );
 }

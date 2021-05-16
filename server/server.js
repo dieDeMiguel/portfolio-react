@@ -14,6 +14,7 @@ const {
     getAboutInfo,
     editProject,
     editAbout,
+    uploadAboutImage,
 } = require("../db");
 
 app.use(compression());
@@ -79,18 +80,6 @@ app.post("/api/project", async (request, response) => {
     response.json({ message: `Project created with id: ${id}` });
 });
 
-app.post("/api/project", async (request, response) => {
-    const about = request.body;
-    const id = await createAbout(about);
-    if (!id) {
-        response.statusCode = 400;
-        response.json({
-            message: "Something went wrong while creating the About info",
-        });
-    }
-    response.json({ message: `About created with id: ${id}` });
-});
-
 app.get("/api/project/:slug", async (request, response) => {
     const slug = request.params.slug;
     const project = await getProjectBySlug({ slug });
@@ -118,6 +107,19 @@ app.post("/api/about", async (request, response) => {
     response.json({ message: `succes, project with id: ${_id}` });
 });
 
+app.post("/api/image/about", async (request, response) => {
+    const obj = request.body;
+    console.log("dentro del server e objeto", obj);
+    const _id = await uploadAboutImage(obj);
+    if (!_id) {
+        response.status(400).json({
+            message:
+                "something went wrong while updating the image data to the about table",
+        });
+    }
+    response.json({ message: `succes, about image updated with id: ${_id}` });
+});
+
 app.get("/api/about", async (request, response) => {
     const about = await getAboutInfo();
     if (!about) {
@@ -126,18 +128,6 @@ app.get("/api/about", async (request, response) => {
         });
     }
     response.json(about);
-});
-
-app.get("/api/about", async (request, response) => {
-    const aboutInfo = await getAboutInfo();
-    if (!aboutInfo) {
-        response.statusCode = 400;
-        response.json({
-            message: "Error while fetching about info",
-        });
-        return;
-    }
-    response.json(aboutInfo);
 });
 
 app.get("*", function (req, res) {

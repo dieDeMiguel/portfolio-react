@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
-function UploadProject({ projectSlug, history }) {
+function EditProject({ projectSlug, history }) {
     const [project, setProject] = useState({});
     const [imageChange, setImageChange] = useState(false);
 
@@ -345,7 +345,7 @@ function UploadProject({ projectSlug, history }) {
                                 style={{ maxWidth: "200px" }}
                             />
                         </div>
-                        <label className="w-64 flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-white">
+                        <label className="w-64 flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue">
                             <svg
                                 className="w-8 h-8"
                                 fill="currentColor"
@@ -389,10 +389,8 @@ function UploadProject({ projectSlug, history }) {
                 src="https://kit.fontawesome.com/1e268974cb.js"
                 crossOrigin="anonymous"
             ></script>
-            <script src="assets/js/helpers.js"></script>
-            <script src="assets/js/whatsapp.js"></script>
         </>
     );
 }
 
-export default UploadProject;
+export default EditProject;

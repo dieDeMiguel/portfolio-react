@@ -139,7 +139,20 @@ function editProject({
     );
 }
 
+function uploadAboutImage(object) {
+    const column = Object.keys(object)[0];
+    const imageURL = object[column];
+    console.log("dentro de db.js column", column);
+    console.log("dentro de db.js imageURL", imageURL);
+    return db
+        .query(`UPDATE about SET ${column} = $1 WHERE id = 1 RETURNING id`, [
+            imageURL,
+        ])
+        .then((results) => results.rows[0].id);
+}
+
 module.exports = {
+    uploadAboutImage,
     editProject,
     deleteProjectBySlug,
     getProjectBySlug,

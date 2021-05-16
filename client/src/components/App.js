@@ -54,7 +54,12 @@ function App() {
                     path="/edit/projects"
                     render={() => <ProjectsList projects={projects} />}
                 />
-                <Route path="/crud/about" render={() => <UploadAboutPage />} />
+                <Route
+                    path="/crud/about"
+                    render={(props) => (
+                        <UploadAboutPage history={props.history} />
+                    )}
+                />
                 <Route path="/upload" render={() => <UploadMenu />} />
                 <Route
                     path={"/edit/project/:slug"}
@@ -62,7 +67,7 @@ function App() {
                     render={(props) => (
                         <EditProject
                             projectSlug={props.match.params.slug}
-                            hisotry={props.history}
+                            history={props.history}
                         />
                     )}
                 />
