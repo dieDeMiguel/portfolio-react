@@ -33,16 +33,19 @@ function Project({ slug, projects }) {
                         >
                             <section className="text-gray-700 body-font">
                                 <div className="container flex flex-col items-center px-5 py-10 mx-auto md:flex-row lg:px-28">
-                                    <div className="flex flex-col w-full pt-0 sm:mb-6 text-left lg:flex-grow md:w-1/2 xl:mr-6 md:pr-2 md:items-start md:mb-0 xl:max-h-96 h-3/4">
+                                    <div className="flex flex-col w-full pt-0 sm:mb-6 text-left lg:flex-grow md:w-1/2 xl:mr-6 md:pr-2 md:items-start md:mb-0 xl:max-h-96">
                                         <h2 className="mb-1 text-xs font-medium tracking-widest text-blue-500black title-font">
                                             {project.subtitle}
                                         </h2>
                                         <h1 className="mb-2 text-5xl font-bold tracking-tighter text-left text-black lg:text-5xl title-font">
                                             {project.heading}
                                         </h1>
-                                        <div className="flex flex-wrap -mx-4 -mt-4 -mb-10 sm:-m-4 h-72">
-                                            <div className="flex flex-col items-start p-4 text-left md:w-11/12 md:mb-0 h-full">
-                                                <div className="flex-grow h-full">
+                                        <div className="flex flex-wrap -mx-4 -mt-4 -mb-10 sm:-m-4 ">
+                                            <div
+                                                className="flex flex-col items-start p-4 text-left md:w-11/12 md:mb-0"
+                                                style={{ "min-height": "50vh" }}
+                                            >
+                                                <div className="flex-grow">
                                                     <h2 className="mb-3 text-lg font-medium tracking-tighter text-gray-700 title-font">
                                                         {project.date}
                                                     </h2>
