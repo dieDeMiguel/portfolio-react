@@ -33,16 +33,16 @@ function Project({ slug, projects }) {
                         >
                             <section className="text-gray-700 body-font">
                                 <div className="container flex flex-col items-center px-5 py-10 mx-auto md:flex-row lg:px-28">
-                                    <div className="flex flex-col w-full pt-0 sm:mb-6 text-left lg:flex-grow md:w-1/2 xl:mr-6 md:pr-2 md:items-start md:mb-0 xl:max-h-96">
+                                    <div className="flex flex-col w-full pt-0 sm:mb-6 text-left lg:flex-grow md:w-1/2 xl:mr-6 md:pr-2 md:items-start md:mb-0 xl:max-h-96 h-3/4">
                                         <h2 className="mb-1 text-xs font-medium tracking-widest text-blue-500black title-font">
                                             {project.subtitle}
                                         </h2>
                                         <h1 className="mb-2 text-5xl font-bold tracking-tighter text-left text-black lg:text-5xl title-font">
                                             {project.heading}
                                         </h1>
-                                        <div className="flex flex-wrap -mx-4 -mt-4 -mb-10 sm:-m-4 ">
-                                            <div className="flex flex-col items-start p-4 text-left md:w-11/12 md:mb-0">
-                                                <div className="flex-grow">
+                                        <div className="flex flex-wrap -mx-4 -mt-4 -mb-10 sm:-m-4 h-72">
+                                            <div className="flex flex-col items-start p-4 text-left md:w-11/12 md:mb-0 h-full">
+                                                <div className="flex-grow h-full">
                                                     <h2 className="mb-3 text-lg font-medium tracking-tighter text-gray-700 title-font">
                                                         {project.date}
                                                     </h2>
@@ -51,7 +51,7 @@ function Project({ slug, projects }) {
                                                     </p>
                                                     <div className="links flex flex-col">
                                                         {project.link ? (
-                                                            <p className="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 lg:mt-5">
+                                                            <p className="inline-flex items-center font-semibold text-blue-700 mb-4 mt-2 lg:mb-0 hover:text-blue-400 lg:mt-5">
                                                                 <a
                                                                     target="_blank"
                                                                     rel="noreferrer"
@@ -65,7 +65,7 @@ function Project({ slug, projects }) {
                                                                 </a>
                                                             </p>
                                                         ) : (
-                                                            <p className="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 lg:mt-5">
+                                                            <p className="inline-flex items-center font-semibold text-blue-700 mb-4 mt-2 lg:mb-0 hover:text-blue-400 lg:mt-5">
                                                                 <a
                                                                     className="font-semibold text-blue-700 hover:text-blue-400"
                                                                     href={
@@ -79,7 +79,7 @@ function Project({ slug, projects }) {
                                                         )}
 
                                                         {project.git && (
-                                                            <p className="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 lg:mt-5">
+                                                            <p className="inline-flex items-center font-semibold text-blue-700 mb-2 lg:mb-0 hover:text-blue-400 lg:mt-5">
                                                                 <a
                                                                     target="_blank"
                                                                     rel="noreferrer"
@@ -142,7 +142,7 @@ function Project({ slug, projects }) {
                                                                     href={
                                                                         project.directory
                                                                     }
-                                                                    className="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 sm:mt-4 lg:mt-30 "
+                                                                    className="inline-flex items-center font-semibold text-blue-700 mb-4 mt-2 lg:mb-0 hover:text-blue-400 sm:mt-4 lg:mt-30 "
                                                                 >
                                                                     Go to
                                                                     project
