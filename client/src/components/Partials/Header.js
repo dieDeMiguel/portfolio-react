@@ -4,7 +4,6 @@ function Header() {
     const [showMenu, setShowMenu] = useState(false);
 
     function onMenuClick() {
-        console.log("click");
         setShowMenu(!showMenu);
     }
 

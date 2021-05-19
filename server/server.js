@@ -41,7 +41,6 @@ app.post(
     s3upload,
     (request, response) => {
         const imageURL = getURLFromFilename(request.file.filename, Bucket);
-        console.log("bucket", request.file);
         response.json(imageURL);
     }
 );
@@ -68,7 +67,6 @@ app.put("/api/project/:slug", async (request, response) => {
 
 app.delete("/project/:slug", async (request, response) => {
     const slug = request.params.slug;
-    console.log("entroooo", slug);
     await deleteProjectBySlug({ slug });
     response.status(200).json({ message: `Project: ${slug} deleted` });
 });
@@ -130,7 +128,6 @@ app.get("/api/about", async (request, response) => {
             message: "Something went wrong while fetching about info",
         });
     }
-    console.log("dentro de db.js", about);
     response.json(about);
 });
 
