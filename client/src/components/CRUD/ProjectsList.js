@@ -16,10 +16,9 @@ function ProjectsList({ projects }) {
             )
             .then(() => {
                 alert(`Project ${heading} deleted`);
-                window.location = "/edit/projects";
+                window.location = "/admin/edit/projects";
             });
     }
-
     return (
         <>
             <div className="container mb-2 flex mx-auto w-full items-center justify-center">
@@ -38,7 +37,7 @@ function ProjectsList({ projects }) {
                                     </div>
                                     <div className="w-1/4 text-wrap text-center flex text-white text-bold flex-col rounded-md bg-red-500 justify-center items-center mr-10 p-2">
                                         <Link
-                                            to={`/edit/project/${project.slug}`}
+                                            to={`/admin/edit/project/${project.slug}`}
                                         >
                                             Edit Project
                                         </Link>

@@ -43,7 +43,7 @@ function Project({ slug, projects }) {
                                         <div className="flex flex-wrap -mx-4 -mt-4 -mb-10 sm:-m-4 ">
                                             <div
                                                 className="flex flex-col items-start p-4 text-left md:w-11/12 md:mb-0"
-                                                style={{ "min-height": "50vh" }}
+                                                style={{ minHeight: "50vh" }}
                                             >
                                                 <div className="flex-grow">
                                                     <h2 className="mb-3 text-lg font-medium tracking-tighter text-gray-700 title-font">

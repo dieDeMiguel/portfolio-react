@@ -40,7 +40,7 @@ function EditProject({ projectSlug, history }) {
                         })
                         .then(() => {
                             alert(`Project: ${project.title} was modified`);
-                            history.push(`edit/project/${project.slug}`);
+                            history.push(`/admin/edit/project/${project.slug}`);
                         });
                 })
                 .catch((error) =>
@@ -64,7 +64,7 @@ function EditProject({ projectSlug, history }) {
                 })
                 .then(() => {
                     alert(`Project: ${project.title} was modified`);
-                    history.push(`edit/project/${project.slug}`);
+                    history.push(`/admin/edit/project/${project.slug}`);
                 });
         }
     }

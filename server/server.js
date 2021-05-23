@@ -4,6 +4,14 @@ const compression = require("compression");
 const path = require("path");
 const { uploader } = require("./upload");
 const { s3upload, getURLFromFilename } = require("./s3");
+const cookieSession = require("cookie-session");
+
+const {
+    passport,
+    ensureAuthenticated,
+    ensureAPIAuthenticated,
+} = require("./auth");
+
 let Bucket;
 if (process.env.Bucket) {
     Bucket = process.env.Bucket;
@@ -31,7 +39,38 @@ app.use(
     })
 );
 
+const cookieSessionMiddleware = cookieSession({
+    secret: "Life is bad",
+    maxAge: 1000 * 60 * 60 * 24 * 90,
+});
+
+app.use(cookieSessionMiddleware);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(express.static(path.join(__dirname, "..", "client", "public")));
+
+//Admin
+app.get("/login", (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "client", "login.html"));
+});
+
+app.post(
+    "/login",
+    passport.authenticate("local", { failureRedirect: "/login" }),
+    function (req, res) {
+        res.redirect("/admin");
+    }
+);
+
+app.get("/admin", ensureAuthenticated, (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "client", "admin.html"));
+});
+
+app.get("/admin/*", ensureAuthenticated, function (req, res) {
+    res.sendFile(path.join(__dirname, "..", "client", "admin.html"));
+});
 
 // Image Upload
 
@@ -58,12 +97,18 @@ app.get("/api/projects", async (request, response) => {
     response.json(projects);
 });
 
-app.put("/api/project/:slug", async (request, response) => {
-    const prevSlug = request.params.slug;
-    const editedProject = request.body;
-    await editProject({ ...editedProject, prevSlug });
-    response.status(200).json({ message: `Project ${prevSlug} was updated` });
-});
+app.put(
+    "/api/project/:slug",
+    ensureAPIAuthenticated,
+    async (request, response) => {
+        const prevSlug = request.params.slug;
+        const editedProject = request.body;
+        await editProject({ ...editedProject, prevSlug });
+        response
+            .status(200)
+            .json({ message: `Project ${prevSlug} was updated` });
+    }
+);
 
 app.delete("/project/:slug", async (request, response) => {
     const slug = request.params.slug;
